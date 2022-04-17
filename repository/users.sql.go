@@ -9,14 +9,22 @@ import (
 	"context"
 )
 
-const getUser = `-- name: GetUser :exec
+const getUser = `-- name: GetUser :one
 SELECT id, created_at, updated_at, email, password_hash FROM users
 WHERE email = $1
 `
 
-func (q *Queries) GetUser(ctx context.Context, email string) error {
-	_, err := q.db.ExecContext(ctx, getUser, email)
-	return err
+func (q *Queries) GetUser(ctx context.Context, email string) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUser, email)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+		&i.Email,
+		&i.PasswordHash,
+	)
+	return i, err
 }
 
 const registration = `-- name: Registration :exec

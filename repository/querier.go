@@ -9,7 +9,7 @@ import (
 )
 
 type Querier interface {
-	GetUser(ctx context.Context, email string) error
+	GetUser(ctx context.Context, email string) (User, error)
 	Registration(ctx context.Context, arg RegistrationParams) error
 }
 
