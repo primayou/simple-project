@@ -8,7 +8,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func RegistrationHandler(c *fiber.Ctx) (err error) {
+func (server *Server) RegistrationHandler(c *fiber.Ctx) (err error) {
+
 	body := c.Body()
 
 	incomingRequest := &RegistrationRequest{}
@@ -23,12 +24,16 @@ func RegistrationHandler(c *fiber.Ctx) (err error) {
 		PasswordHash: incomingRequest.Password,
 	}
 
-	fmt.Println(arg)
+	err = server.store.Registration(c.Context(), arg)
+
+	if err != nil {
+		fmt.Print(err)
+	}
 
 	return c.JSON(incomingRequest)
 }
 
-func LoginHandler(c *fiber.Ctx) (err error) {
+func (server *Server) LoginHandler(c *fiber.Ctx) (err error) {
 	body := c.Body()
 
 	incomingRequest := &LoginRequest{}
