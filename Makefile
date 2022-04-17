@@ -16,7 +16,7 @@ migration-down:
 
 # Create Migration
 migration-create:
-	migrate create -ext sql -dir migrations -seq $(filename)
+	migrate create -ext sql -dir db/migrations -seq $(filename)
 
 # Create Database
 create-db:
@@ -28,5 +28,8 @@ drop-db:
 
 run-docker-compose:
 	docker-compose up -d
+
+sqlc:
+	sqlc generate
 
 .PHONY: migration-up migration-down migration-create create-db drop-db
