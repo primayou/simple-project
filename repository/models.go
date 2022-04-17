@@ -8,14 +8,14 @@ import (
 	"database/sql"
 )
 
-type Posts struct {
+type Post struct {
 	ID        sql.NullInt64 `json:"id"`
 	CreatedAt sql.NullTime  `json:"created_at"`
 	UpdatedAt sql.NullTime  `json:"updated_at"`
 	Content   string        `json:"content"`
 }
 
-type Users struct {
+type User struct {
 	ID           sql.NullInt64 `json:"id"`
 	CreatedAt    sql.NullTime  `json:"created_at"`
 	UpdatedAt    sql.NullTime  `json:"updated_at"`
