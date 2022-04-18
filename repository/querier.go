@@ -9,6 +9,8 @@ import (
 )
 
 type Querier interface {
+	CreatePosts(ctx context.Context, content string) error
+	CreateTransaction(ctx context.Context, arg CreateTransactionParams) error
 	GetUser(ctx context.Context, email string) (User, error)
 	Registration(ctx context.Context, arg RegistrationParams) error
 	UpdateProfile(ctx context.Context, arg UpdateProfileParams) error

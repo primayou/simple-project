@@ -15,6 +15,16 @@ type Post struct {
 	Content   string        `json:"content"`
 }
 
+type Transaction struct {
+	ID        sql.NullInt64 `json:"id"`
+	CreatedAt sql.NullTime  `json:"created_at"`
+	UpdatedAt sql.NullTime  `json:"updated_at"`
+	UserID    string        `json:"user_id"`
+	Amount    string        `json:"amount"`
+	Currency  string        `json:"currency"`
+	Status    string        `json:"status"`
+}
+
 type User struct {
 	ID           sql.NullInt64 `json:"id"`
 	CreatedAt    sql.NullTime  `json:"created_at"`
