@@ -7,6 +7,7 @@ package repository
 
 import (
 	"context"
+	"database/sql"
 )
 
 const getUser = `-- name: GetUser :one
@@ -38,5 +39,20 @@ type RegistrationParams struct {
 
 func (q *Queries) Registration(ctx context.Context, arg RegistrationParams) error {
 	_, err := q.db.ExecContext(ctx, registration, arg.Email, arg.PasswordHash)
+	return err
+}
+
+const updateProfile = `-- name: UpdateProfile :exec
+UPDATE users set email = $1, password_hash = $2 WHERE id = $3
+`
+
+type UpdateProfileParams struct {
+	Email        string        `json:"email"`
+	PasswordHash string        `json:"password_hash"`
+	ID           sql.NullInt64 `json:"id"`
+}
+
+func (q *Queries) UpdateProfile(ctx context.Context, arg UpdateProfileParams) error {
+	_, err := q.db.ExecContext(ctx, updateProfile, arg.Email, arg.PasswordHash, arg.ID)
 	return err
 }
