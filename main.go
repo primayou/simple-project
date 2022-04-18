@@ -23,7 +23,13 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	dbURL := getDBSourceURL()
+	// Get Config
+	config, err := getConfig()
+	if err != nil {
+		panic(err)
+	}
+
+	dbURL := getDBSourceURL(&config.DBConfig)
 
 	conn, err := sql.Open(os.Getenv("DB_DRIVER"), dbURL)
 
@@ -35,23 +41,11 @@ func main() {
 
 	application := handler.NewServer(app, store)
 
-	// Get Config
-	config, err := getConfig()
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("Open Port at " + config.AppConfig.AppPort)
+	fmt.Println(config.AppConfig.AppName + " Open Port at " + config.AppConfig.AppPort)
 	application.Listen(":" + config.AppConfig.AppPort)
 }
 
-func getDBSourceURL() string {
+func getDBSourceURL(config *DBConfig) string {
 
-	DB_HOST := os.Getenv("DB_HOST")
-	DB_PASSWORD := os.Getenv("DB_PASSWORD")
-	DB_USERNAME := os.Getenv("DB_USERNAME")
-	DB_PORT := os.Getenv("DB_PORT")
-	DB_NAME := os.Getenv("DB_NAME")
-
-	return fmt.Sprintf("postgresql://%s:%s@%s:%s/%s?sslmode=disable", DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
+	return fmt.Sprintf("postgresql://%s:%s@%s:%s/%s?sslmode=disable", config.DBUsername, config.DBPassword, config.DBHost, config.DBPort, config.DBName)
 }

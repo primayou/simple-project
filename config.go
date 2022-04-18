@@ -1,24 +1,31 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
+	"os"
 
-	"gopkg.in/yaml.v3"
+	"github.com/joho/godotenv"
 )
 
 func getConfig() (*Config, error) {
-	yfile, err := ioutil.ReadFile("config.yaml")
+
+	err := godotenv.Load()
 
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
-	config := &Config{}
 
-	err = yaml.Unmarshal(yfile, config)
-
-	if err != nil {
-		fmt.Println(err)
+	config := &Config{
+		AppConfig: AppConfig{
+			AppPort: os.Getenv("APP_PORT"),
+			AppName: os.Getenv("APP_NAME"),
+		},
+		DBConfig: DBConfig{
+			DBHost:     os.Getenv("DB_HOST"),
+			DBPort:     os.Getenv("DB_PORT"),
+			DBName:     os.Getenv("DB_NAME"),
+			DBUsername: os.Getenv("DB_USERNAME"),
+			DBPassword: os.Getenv("DB_PASSWORD"),
+		},
 	}
 
 	return config, err
