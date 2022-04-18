@@ -8,15 +8,15 @@ pre-commit:
 
 # Run Up Migration
 migration-up:
-	migrate -path migrations -database "${DATABASE_URL}" -verbose up
+	migrate -path db/migration -database "${DATABASE_URL}" -verbose up
 
 # Run Down Migration
 migration-down:
-	migrate -path migrations -database "${DATABASE_URL}" -verbose down
+	migrate -path db/migration -database "${DATABASE_URL}" -verbose down
 
 # Create Migration
 migration-create:
-	migrate create -ext sql -dir db/migrations -seq $(filename)
+	migrate create -ext sql -dir db/migration -seq $(filename)
 
 # Create Database
 create-db:
