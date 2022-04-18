@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"simple-projects/repository"
@@ -24,11 +23,10 @@ func (s *Server) RegistrationHandler(c *fiber.Ctx) (err error) {
 
 	if isUserExist.Email != "" {
 		return fiber.NewError(fiber.ErrBadRequest.Code, "something wrong")
-
 	}
 
 	// Encrypt password
-	encryptedPassword := base64.StdEncoding.EncodeToString([]byte(incomingRequest.Password))
+	encryptedPassword := encrypt(incomingRequest.Password)
 
 	arg := repository.RegistrationParams{
 		Email:        incomingRequest.Email,
