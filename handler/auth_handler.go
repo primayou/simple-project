@@ -43,7 +43,8 @@ func (s *Server) RegistrationHandler(c *fiber.Ctx) (err error) {
 	return c.JSON(incomingRequest)
 }
 
-func (server *Server) LoginHandler(c *fiber.Ctx) (err error) {
+func (s *Server) LoginHandler(c *fiber.Ctx) (err error) {
+	ctx := c.Context()
 	body := c.Body()
 
 	incomingRequest := &LoginRequest{}
@@ -53,12 +54,26 @@ func (server *Server) LoginHandler(c *fiber.Ctx) (err error) {
 		fmt.Println(err)
 	}
 
-	return c.JSON(incomingRequest)
+	user, _ := s.store.GetUser(ctx, incomingRequest.Email)
+
+	if user.PasswordHash != encrypt(incomingRequest.Password) {
+		return fiber.NewError(fiber.ErrBadRequest.Code, "credential is not valid")
+	}
+
+	token := CreateAccessToken()
+
+	return c.JSON(&LoginResponse{
+		Token: token,
+	})
 }
 
 type RegistrationRequest struct {
 	Email    string `json:"email,omitempty"`
 	Password string `json:"password,omitempty"`
+}
+
+type LoginResponse struct {
+	Token string `json:"token,omitempty"`
 }
 
 type LoginRequest struct {
