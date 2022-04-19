@@ -1,5 +1,8 @@
 # github.com/andybalholm/brotli v1.0.4
 github.com/andybalholm/brotli
+# github.com/dgrijalva/jwt-go v3.2.0+incompatible
+## explicit
+github.com/dgrijalva/jwt-go
 # github.com/gofiber/fiber/v2 v2.32.0
 ## explicit
 github.com/gofiber/fiber/v2
@@ -52,4 +55,3 @@ golang.org/x/sys/unix
 golang.org/x/sys/windows
 # gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 ## explicit
-gopkg.in/yaml.v3
