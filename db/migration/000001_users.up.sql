@@ -1,6 +1,5 @@
--- Create users table
-CREATE TABLE IF NOT EXISTS users (
-    id BIGSERIAL,
+CREATE TABLE "user" (
+    id serial not null primary key,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW (),
     updated_at TIMESTAMP NULL,
     email TEXT NOT NULL,
