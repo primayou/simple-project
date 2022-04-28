@@ -3,12 +3,13 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
+	"simple-projects/models"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func (s *Server) RegistrationHandler(c *fiber.Ctx) (err error) {
-	// ctx := c.Context()
+	ctx := c.Context()
 	body := c.Body()
 
 	incomingRequest := &RegistrationRequest{}
@@ -18,18 +19,25 @@ func (s *Server) RegistrationHandler(c *fiber.Ctx) (err error) {
 		return err
 	}
 
-	// isUserExist, _ := s.store.GetUser(ctx, incomingRequest.Email)
+	isUserExist, _ := s.store.GetUser(ctx, incomingRequest.Email)
 
-	// if isUserExist.Email != "" {
-	// 	return fiber.NewError(fiber.ErrBadRequest.Code, "something wrong")
-	// }
+	if isUserExist != nil {
+		return fiber.NewError(fiber.ErrBadRequest.Code, "something wrong")
+	}
+
+	mUser := &models.User{}
+	mUser.Email = incomingRequest.Email
+	mUser.PasswordHash = encrypt(incomingRequest.Password)
+
+	err = s.store.CreateUser(ctx, mUser)
 
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 
-	return c.JSON(incomingRequest)
+	return c.JSON(&RegistrationResponse{
+		Message: "success",
+	})
 }
 
 func (s *Server) LoginHandler(c *fiber.Ctx) (err error) {
@@ -47,9 +55,9 @@ func (s *Server) LoginHandler(c *fiber.Ctx) (err error) {
 
 	fmt.Println(user)
 
-	// if user.PasswordHash != encrypt(incomingRequest.Password) {
-	// 	return fiber.NewError(fiber.ErrBadRequest.Code, "credential is not valid")
-	// }
+	if user.PasswordHash != encrypt(incomingRequest.Password) {
+		return fiber.NewError(fiber.ErrBadRequest.Code, "credential is not valid")
+	}
 
 	token := CreateAccessToken()
 
@@ -61,6 +69,9 @@ func (s *Server) LoginHandler(c *fiber.Ctx) (err error) {
 type RegistrationRequest struct {
 	Email    string `json:"email,omitempty"`
 	Password string `json:"password,omitempty"`
+}
+type RegistrationResponse struct {
+	Message string `json:"message,omitempty"`
 }
 
 type LoginResponse struct {
