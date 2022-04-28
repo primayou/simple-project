@@ -24,6 +24,7 @@ func (server *Server) setupRouter(app *fiber.App) *fiber.App {
 	app.Get("/", GetUsersHandler)
 	app.Post("/login", server.LoginHandler)
 	app.Post("/registration", server.RegistrationHandler)
+	app.Get("/users", server.GetUser)
 	// app.Post("/forgot-password", handler.ForgotPasswordHandler)
 
 	// // POST

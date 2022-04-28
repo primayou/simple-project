@@ -3,13 +3,12 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"simple-projects/repository"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func (s *Server) RegistrationHandler(c *fiber.Ctx) (err error) {
-	ctx := c.Context()
+	// ctx := c.Context()
 	body := c.Body()
 
 	incomingRequest := &RegistrationRequest{}
@@ -19,21 +18,11 @@ func (s *Server) RegistrationHandler(c *fiber.Ctx) (err error) {
 		return err
 	}
 
-	isUserExist, _ := s.store.GetUser(ctx, incomingRequest.Email)
+	// isUserExist, _ := s.store.GetUser(ctx, incomingRequest.Email)
 
-	if isUserExist.Email != "" {
-		return fiber.NewError(fiber.ErrBadRequest.Code, "something wrong")
-	}
-
-	// Encrypt password
-	encryptedPassword := encrypt(incomingRequest.Password)
-
-	arg := repository.RegistrationParams{
-		Email:        incomingRequest.Email,
-		PasswordHash: encryptedPassword,
-	}
-
-	err = s.store.Registration(ctx, arg)
+	// if isUserExist.Email != "" {
+	// 	return fiber.NewError(fiber.ErrBadRequest.Code, "something wrong")
+	// }
 
 	if err != nil {
 		fmt.Println(err)
@@ -56,9 +45,11 @@ func (s *Server) LoginHandler(c *fiber.Ctx) (err error) {
 
 	user, _ := s.store.GetUser(ctx, incomingRequest.Email)
 
-	if user.PasswordHash != encrypt(incomingRequest.Password) {
-		return fiber.NewError(fiber.ErrBadRequest.Code, "credential is not valid")
-	}
+	fmt.Println(user)
+
+	// if user.PasswordHash != encrypt(incomingRequest.Password) {
+	// 	return fiber.NewError(fiber.ErrBadRequest.Code, "credential is not valid")
+	// }
 
 	token := CreateAccessToken()
 

@@ -7,6 +7,7 @@ import (
 
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	"github.com/joho/godotenv"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 
 	"database/sql"
 	"fmt"
@@ -36,6 +37,8 @@ func main() {
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
+
+	boil.SetDB(conn)
 
 	store := repository.NewStore(conn)
 
