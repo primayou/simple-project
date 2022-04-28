@@ -7,7 +7,6 @@ import (
 
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	"github.com/joho/godotenv"
-	_ "github.com/primayou/app-protocol/pb/users"
 
 	"database/sql"
 	"fmt"
