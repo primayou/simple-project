@@ -29,7 +29,7 @@ drop-db:
 run-docker-compose:
 	docker-compose up -d
 
-sqlc:
-	sqlc generate
+gen-model:
+	sqlboiler psql
 
 .PHONY: migration-up migration-down migration-create create-db drop-db
