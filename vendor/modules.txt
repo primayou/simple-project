@@ -3,6 +3,11 @@ github.com/andybalholm/brotli
 # github.com/dgrijalva/jwt-go v3.2.0+incompatible
 ## explicit
 github.com/dgrijalva/jwt-go
+# github.com/friendsofgo/errors v0.9.2
+## explicit
+github.com/friendsofgo/errors
+# github.com/fsnotify/fsnotify v1.5.1
+github.com/fsnotify/fsnotify
 # github.com/gofiber/fiber/v2 v2.32.0
 ## explicit
 github.com/gofiber/fiber/v2
@@ -15,6 +20,8 @@ github.com/gofiber/fiber/v2/internal/msgp
 github.com/gofiber/fiber/v2/internal/schema
 github.com/gofiber/fiber/v2/internal/uuid
 github.com/gofiber/fiber/v2/utils
+# github.com/gofrs/uuid v4.0.0+incompatible
+github.com/gofrs/uuid
 # github.com/golang-migrate/migrate/v4 v4.15.1
 ## explicit
 github.com/golang-migrate/migrate/v4
@@ -27,9 +34,23 @@ github.com/golang-migrate/migrate/v4/source
 github.com/hashicorp/errwrap
 # github.com/hashicorp/go-multierror v1.1.0
 github.com/hashicorp/go-multierror
+# github.com/hashicorp/hcl v1.0.0
+github.com/hashicorp/hcl
+github.com/hashicorp/hcl/hcl/ast
+github.com/hashicorp/hcl/hcl/parser
+github.com/hashicorp/hcl/hcl/printer
+github.com/hashicorp/hcl/hcl/scanner
+github.com/hashicorp/hcl/hcl/strconv
+github.com/hashicorp/hcl/hcl/token
+github.com/hashicorp/hcl/json/parser
+github.com/hashicorp/hcl/json/scanner
+github.com/hashicorp/hcl/json/token
 # github.com/joho/godotenv v1.4.0
 ## explicit
 github.com/joho/godotenv
+# github.com/kat-co/vala v0.0.0-20170210184112-42e1d8b61f12
+## explicit
+github.com/kat-co/vala
 # github.com/klauspost/compress v1.15.0
 github.com/klauspost/compress/flate
 github.com/klauspost/compress/gzip
@@ -39,6 +60,31 @@ github.com/klauspost/compress/zlib
 github.com/lib/pq
 github.com/lib/pq/oid
 github.com/lib/pq/scram
+# github.com/magiconair/properties v1.8.5
+github.com/magiconair/properties
+# github.com/mitchellh/mapstructure v1.4.2
+github.com/mitchellh/mapstructure
+# github.com/pelletier/go-toml v1.9.4
+github.com/pelletier/go-toml
+# github.com/spf13/afero v1.6.0
+github.com/spf13/afero
+github.com/spf13/afero/mem
+# github.com/spf13/cast v1.4.1
+github.com/spf13/cast
+# github.com/spf13/jwalterweatherman v1.1.0
+github.com/spf13/jwalterweatherman
+# github.com/spf13/pflag v1.0.5
+github.com/spf13/pflag
+# github.com/spf13/viper v1.9.0
+## explicit
+github.com/spf13/viper
+github.com/spf13/viper/internal/encoding
+github.com/spf13/viper/internal/encoding/hcl
+github.com/spf13/viper/internal/encoding/json
+github.com/spf13/viper/internal/encoding/toml
+github.com/spf13/viper/internal/encoding/yaml
+# github.com/subosito/gotenv v1.2.0
+github.com/subosito/gotenv
 # github.com/valyala/bytebufferpool v1.0.0
 github.com/valyala/bytebufferpool
 # github.com/valyala/fasthttp v1.35.0
@@ -48,8 +94,28 @@ github.com/valyala/fasthttp/reuseport
 github.com/valyala/fasthttp/stackless
 # github.com/valyala/tcplisten v1.0.0
 github.com/valyala/tcplisten
-# go.uber.org/atomic v1.7.0
+# github.com/volatiletech/inflect v0.0.1
+github.com/volatiletech/inflect
+# github.com/volatiletech/null/v8 v8.1.2
 ## explicit
+github.com/volatiletech/null/v8
+github.com/volatiletech/null/v8/convert
+# github.com/volatiletech/randomize v0.0.1
+## explicit
+github.com/volatiletech/randomize
+# github.com/volatiletech/sqlboiler/v4 v4.11.0
+## explicit
+github.com/volatiletech/sqlboiler/v4/boil
+github.com/volatiletech/sqlboiler/v4/drivers
+github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-psql/driver
+github.com/volatiletech/sqlboiler/v4/importers
+github.com/volatiletech/sqlboiler/v4/queries
+github.com/volatiletech/sqlboiler/v4/queries/qm
+github.com/volatiletech/sqlboiler/v4/queries/qmhelper
+# github.com/volatiletech/strmangle v0.0.4
+## explicit
+github.com/volatiletech/strmangle
+# go.uber.org/atomic v1.7.0
 go.uber.org/atomic
 # golang.org/x/net v0.0.0-20220421235706-1d1ef9303861
 ## explicit
@@ -58,7 +124,15 @@ go.uber.org/atomic
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
+# golang.org/x/text v0.3.7
+golang.org/x/text/transform
+golang.org/x/text/unicode/norm
+# golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
+golang.org/x/xerrors
+golang.org/x/xerrors/internal
 # google.golang.org/genproto v0.0.0-20220421151946-72621c1f0bd3
 ## explicit
-# gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
-## explicit
+# gopkg.in/ini.v1 v1.63.2
+gopkg.in/ini.v1
+# gopkg.in/yaml.v2 v2.4.0
+gopkg.in/yaml.v2
