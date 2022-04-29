@@ -51,15 +51,25 @@ func (s *Server) LoginHandler(c *fiber.Ctx) (err error) {
 		fmt.Println(err)
 	}
 
-	user, _ := s.store.GetUser(ctx, incomingRequest.Email)
+	user, err := s.store.GetUser(ctx, incomingRequest.Email)
 
-	fmt.Println(user)
+	if err != nil {
+		return fiber.NewError(fiber.ErrInternalServerError.Code, "Internal Server Error")
+	}
+
+	if user == nil {
+		return fiber.NewError(fiber.ErrNotFound.Code, "user not found")
+	}
 
 	if user.PasswordHash != encrypt(incomingRequest.Password) {
 		return fiber.NewError(fiber.ErrBadRequest.Code, "credential is not valid")
 	}
 
-	token := CreateAccessToken()
+	token, err := CreateAccessToken(user)
+
+	if err != nil {
+		return fiber.NewError(fiber.ErrInternalServerError.Code, "Internal Server Error")
+	}
 
 	return c.JSON(&LoginResponse{
 		Token: token,

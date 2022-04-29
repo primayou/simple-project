@@ -28,8 +28,6 @@ func (s *Server) GetUser(c *fiber.Ctx) (err error) {
 		})
 	}
 
-	fmt.Println(response)
-
 	return c.JSON(response)
 
 }
