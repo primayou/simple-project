@@ -30,6 +30,6 @@ run-docker-compose:
 	docker-compose up -d
 
 gen-model:
-	sqlboiler psql
+	sh .sqlboiler/gen-model.sh
 
 .PHONY: migration-up migration-down migration-create create-db drop-db
