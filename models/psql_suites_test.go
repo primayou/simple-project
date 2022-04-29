@@ -6,5 +6,7 @@ package models
 import "testing"
 
 func TestUpsert(t *testing.T) {
+	t.Run("Transactions", testTransactionsUpsert)
+
 	t.Run("Users", testUsersUpsert)
 }
